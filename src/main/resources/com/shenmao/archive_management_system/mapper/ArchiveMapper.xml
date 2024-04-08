@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shenmao.archive_management_system.mapper.ArchiveMapper">
+    <select id="list" resultType="com.shenmao.archive_management_system.pojo.Archive">
+        select * from archive
+        <where>
+          <if test="archiveName !='' and archiveName !=null ">
+              and archiveName like CONCAT('%',#{archiveName},'%')
+          </if>
+          <if test="archiveCategory !='' and archiveCategory !=null">
+              and archiveCategory = #{archiveCategory}
+          </if>
+          <if test="archiveDate !='' and archiveDate !=null">
+              and archiveDate = #{archiveDate}
+          </if>
+        and status = #{status}
+        and secrecy = #{secrecy}
+        </where>
+    </select>
+
+    <select id="listA" resultType="com.shenmao.archive_management_system.pojo.Archive">
+        select * from archive
+        <where>
+            <if test="archiveName !='' and archiveName !=null">
+                and archiveName like concat('%',#{archiveName},'%')
+            </if>
+            <if test="archiveCategory !='' and archiveCategory !=null">
+                and archiveCategory = #{archiveCategory}
+            </if>
+            <if test="archiveDate !='' and archiveDate !=null">
+                and archiveDate = #{archiveDate}
+            </if>
+            and status = #{status}
+        </where>
+    </select>
+<!--    <select id="countCategory" resultType="com.shenmao.archive_management_system.pojo.Category">-->
+<!--        select archiveCategory, count(*) from archive group by archiveCategory-->
+<!--    </select>-->
+</mapper>
